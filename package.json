@@ -1,0 +1,26 @@
+{
+  "name": "email_processor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "mail-script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Samz851/catchletter-mail-processor.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Samz851/catchletter-mail-processor/issues"
+  },
+  "homepage": "https://github.com/Samz851/catchletter-mail-processor#readme",
+  "dependencies": {
+    "compress-images": "^1.5.8",
+    "mailparser": "^2.7.1",
+    "mailparser-mit": "^1.0.0",
+    "mongodb": "^3.3.2",
+    "webshot": "^0.18.0"
+  }
+}
