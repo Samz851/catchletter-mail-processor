@@ -33,7 +33,7 @@ simpleImap.on('end', function(mails) {
     // console.log(mail.header['content-type']);
     handler.parse_email(mail).then((result) => {
       // console.log(result.message.parsed);
-      if(result.success && result.message.parsed.to){
+      if(result.success && result.message.parsed.to && result.mailImageDoc.parsedHtml.html){
         handler.set_mailImageDoc(result.message)
         .then(function(mailObj){
           // console.log(mailObj);
@@ -63,7 +63,7 @@ simpleImap.on('end', function(mails) {
         }, function(err){
           console.log(err);
         });
-        simpleImap.addFlags(mail.attrs.uid, 'Deleted')
+        simpleImap.getImap().addFlags(mail.attrs.uid, 'Deleted')
 
       }else{
         // console.log(result.success);
@@ -75,7 +75,9 @@ simpleImap.on('end', function(mails) {
   });
     
   });
-  simpleImap.closeBox();
+  simpleImap.getImap().closeBox((err)=>{
+    if (err) console.log(err);
+  });
   // console.log(mail);
 });
 simpleImap.start();

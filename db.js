@@ -7,9 +7,10 @@ var state = {
 
 exports.connect = function (url, done) {
     if (!state.db){
-        var opts = {db: {authSource: 'admin'}}
+        var opts = {db: {authSource: 'admin'}, useNewUrlParser: true, useUnifiedTopology: true }
         MongoClient.connect(url, opts, function (err, db) {
             if (!err){
+                // console.log(db);
                 state.db = db;
                 state.collections = {
                     websites: db.collection('websites', (err, collection)=>{console.log(err)}),

@@ -164,12 +164,7 @@ class MailHandler {
 
     }
     process_email_images(mailObj){
-        // console.log(
-        //     Object.keys(
-        //         mailObj
-        //         )
-        //     );
-        // return;
+
         let nameOfFile = "screenshots_" + mailObj.parsedHtml.to[0].address + "_" + mailObj.uid + ".png";
         let user = mailObj.parsedHtml.to[0].address.split('@');
         user = user[0];
