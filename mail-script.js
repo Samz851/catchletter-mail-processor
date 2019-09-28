@@ -33,7 +33,7 @@ simpleImap.on('end', function(mails) {
     // console.log(mail.header['content-type']);
     handler.parse_email(mail).then((result) => {
       // console.log(result.message.parsed);
-      if(result.success && result.message.parsed.to && result.mailImageDoc.parsedHtml.html){
+      if(result.success && result.message.parsed.to && result.mailImageDoc.parsed.html){
         handler.set_mailImageDoc(result.message)
         .then(function(mailObj){
           // console.log(mailObj);
