@@ -155,7 +155,7 @@ class MailHandler {
                 {svg: {engine: 'svgo', command: '--multipass'}},
                 {gif: {engine: 'gifsicle', command: ['--colors', '64', '--use-col=web']}}, (error, completed, statistic) => {
                     if(error) {
-                        reject({success: false, error: erro});
+                        reject({success: false, error: error});
                     }else{
                         resolve({success: true, message: "screenshot created"});
                     }
