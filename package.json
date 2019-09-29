@@ -25,6 +25,7 @@
     "mailparser-mit": "^1.0.0",
     "mongodb": "^2.2.36",
     "morgan": "^1.9.1",
+    "optipng-bin": "^6.0.0",
     "webshot": "^0.18.0"
   }
 }
