@@ -18,10 +18,7 @@
   "homepage": "https://github.com/Samz851/catchletter-mail-processor#readme",
   "dependencies": {
     "compress-images": "^1.5.8",
-<<<<<<< HEAD
-=======
     "cors": "^2.8.5",
->>>>>>> 23cae0ca1a110430d3102b882c3705f0c78a8c58
     "express": "^4.17.1",
     "handlebars": "^4.3.1",
     "imap": "^0.8.19",
@@ -29,10 +26,7 @@
     "mailparser-mit": "^1.0.0",
     "mongodb": "^2.2.36",
     "morgan": "^1.9.1",
-<<<<<<< HEAD
     "optipng-bin": "^6.0.0",
-=======
->>>>>>> 23cae0ca1a110430d3102b882c3705f0c78a8c58
     "webshot": "^0.18.0"
   }
 }
