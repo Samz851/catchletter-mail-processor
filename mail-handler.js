@@ -113,7 +113,7 @@ class MailHandler {
                         // console.log('result is: ');
                         // console.log(result);
                         if(result.success){
-                            mailObj.collection.update({
+                            db.collections().websites.update({
                                 _id: ObjectId(mailObj.website._id)
                             }, {
                                     $set: {

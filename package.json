@@ -18,11 +18,14 @@
   "homepage": "https://github.com/Samz851/catchletter-mail-processor#readme",
   "dependencies": {
     "compress-images": "^1.5.8",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
     "handlebars": "^4.3.1",
     "imap": "^0.8.19",
     "mailparser": "^2.7.1",
     "mailparser-mit": "^1.0.0",
     "mongodb": "^2.2.36",
+    "morgan": "^1.9.1",
     "webshot": "^0.18.0"
   }
 }
