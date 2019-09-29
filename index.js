@@ -18,12 +18,13 @@ const express = require('express');
 const morgan = require('morgan');
 const app = express();
 const cors = require('cors');
+const path = require('path');
 
 
 /**
  * S E T T I N G S
  */
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 7120);
 
 /**
  * M I D D L E W A R E S
@@ -52,6 +53,12 @@ app.listen(app.get('port'), (error) => {
     }
 });
 
+/**
+ * T E S T I N G   P A G E
+ */
+app.get('/test', (req, res, err)=>{
+    res.sendFile(path.join(__dirname, 'test.html'));
+})
 /** this ends this file
 * server/index
 **/
