@@ -14,7 +14,8 @@ class MailHandler {
     
     constructor(){
         // this.host = method == 'main' ? {domain: 'mail.catchletter.com', user: 'notifications@cldev.pw', pass: 'KxsFb54Jqh34YE4TxL'} : {domain: 'custom1.catchletter.com', user: 'notifications@custom1.cldev.pw', pass: 'pC5j8vS6MDpT5gwH'}
-        db.connect('mongodb://catchlroot:R%40w%40n851@34.68.172.86:27017/catchlDBDEV', function (err) {
+        // db.connect('mongodb://catchlroot:R%40w%40n851@34.68.172.86:27017/catchlDBDEV', function (err) {
+            db.connect('mongodb://catchlroot:R%40w%40n851@34.68.172.86:27017/catchlDB', function (err) {
             //SAM
             if (err) throw err;
             console.log('DB connection success');
