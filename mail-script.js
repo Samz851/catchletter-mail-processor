@@ -65,20 +65,24 @@ mailListener.on("mail", function(mail, seqno, attributes){
 
   handler.set_mailImageDoc(mail, attributes).then(function(mailObj){
     // console.log(data);
-    handler.process_email_images(mailObj.mailImageDoc).then(function(result){
-      // console.log(result);
-      handler.create_thumbnails(result.dir, result.at).then(function(thumbResult){
-        console.log(thumbResult);
-        //Now Save the MailImageDoc to DB
-        if(thumbResult.success){
-          handler.save_mailImage(mailObj).then(function(result){
-            console.log(result);
-          }, function(err){
-            console.log(err);
+    if(mailObj.success){
+      handler.process_email_images(mailObj.mailImageDoc).then(function(result){
+        // console.log(result);
+        if(result.success){
+          handler.create_thumbnails(result.dir, result.at).then(function(thumbResult){
+            // console.log(thumbResult);
+            //Now Save the MailImageDoc to DB
+            if(thumbResult.success){
+              handler.save_mailImage(mailObj).then(function(result){
+                console.log(result);
+              }, function(err){
+                console.log(err);
+              });
+            }
           });
         }
       });
-    });
+    }
 
   });
   // mail processing code goes here
