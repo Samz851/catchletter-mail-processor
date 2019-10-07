@@ -1,6 +1,6 @@
 // const SimpleImap = require('./imap-listener');
 const fbParser = require('mailparser-mit').MailParser;
-const Parser = require('mailparser').simpleParser;
+const simpleParser = require('mailparser').simpleParser;
 const path = require('path');
 const ObjectId = require('mongodb').ObjectID;
 const webshot = require('webshot');
@@ -79,12 +79,12 @@ class MailHandler {
                     var htmlToSend = template(replacements);
                     var mailOptions = {
                         from: 'no-reply@catchletter.com',
-                        to: [success.email,'samz.otb@gmail.com'],
+                        to: success.email,
                         subject: 'CatchLetter Alert: ' + mailObj.website.website_name + ' has sent their first newsletter',
                         html: htmlToSend
                     }
                     //TRYING
-                    mailOptions.to = "samz.otb@gmail.com";
+                    // mailOptions.to = "samz.otb@gmail.com";
                     this.transporter.sendMail(mailOptions, function (error, info) {
                         if(error){
                             console.log('error sending');
@@ -165,12 +165,12 @@ class MailHandler {
 
     }
     process_email_images(mailObj){
-
-        let nameOfFile = "screenshots_" + mailObj.parsedHtml.to[0].address + "_" + mailObj.uid + ".png";
-        let user = mailObj.parsedHtml.to[0].address.split('@');
+        // console.log(mailObj.buffer.to[0].address);
+        let nameOfFile = "screenshots_" + mailObj.buffer.to[0].address + "_" + mailObj.uid + ".png";
+        let user = mailObj.buffer.to[0].address.split('@');
         user = user[0];
 
-        //SAM check directories if not exist, create
+        // //SAM check directories if not exist, create
         var dir = './screenshots/'+user;
         if (!fs.existsSync(dir)){
             fs.mkdirSync(dir);
@@ -185,7 +185,7 @@ class MailHandler {
             if(!fs.existsSync('./screenshots/' +user+'/'+nameOfFile)) {
                 // console.log('file doesnt exist');
                 // console.log(this.mailObj.parsed)
-                webshot(mailObj.parsedHtml.html, './screenshots/'+user+'/'+ nameOfFile, {shotSize:{width: 'all', height: 'all'}, siteType: 'html'}, (err) => {
+                webshot(mailObj.parsedHtml, './screenshots/'+user+'/'+ nameOfFile, {shotSize:{width: 'all', height: 'all'}, siteType: 'html'}, (err) => {
                     if(!err){
                         resolve({success: true, message:"screenshot created", at: nameOfFile, dir: user});
                         // this.create_thumbnails(user, nameOfFile).then((result) => {
@@ -218,45 +218,54 @@ class MailHandler {
 
             let website={};
                 // SAM Parse email
-
-            let fallbackParser = new fbParser({defaultCharset: "utf-8"});
-            fallbackParser.on("end", function(mail){
-                // console.log(Object.keys(mail));
-                mailObj.parsed = mail;
-                if(mailObj.parsed){resolve({success: true, message: mailObj})}else{reject({success: false, msg: "failed to parse email"})}
-            }, function(err){
-                reject({success: true, message: err});
-            });
-            fallbackParser.write(mailObj.buffer);
-            fallbackParser.end();
+                simpleParser(mailObj.buffer)
+                .then(parsed => {
+                    console.log(mailObj.buffer);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+            // let fallbackParser = new fbParser();
+            // fallbackParser.on("end", function(mail){
+            //     // console.log(Object.keys(mail));
+            //     mailObj.parsed = mail;
+            //     // console.log(mail);
+            //     if(mailObj.parsed){resolve({success: true, message: mailObj})}else{reject({success: false, msg: "failed to parse email"})}
+            // }, function(err){
+            //     reject({success: true, message: err});
+            // });
+            // fallbackParser.write(mailObj.buffer);
+            // fallbackParser.end();
                    
         })
 
     }
-    set_mailImageDoc(mailObj){
+    set_mailImageDoc(mailObj, attrs){
+        // console.log("emailObj: " + JSON.stringify(arguments));
+        // console.log("emailObj: " + JSON.stringify(Object.keys(arguments)));
         return new Promise((resolve, reject) => {
             db.collections().websites.findOne({
-                emailDomain: mailObj.parsed.to[0].address
+                emailDomain: mailObj.to[0].address
             }).then(function(data){
                 // console.log(data);
                 if(data){
                     let website = data;
     
-                    let flag = mailObj.attrs.flags.indexOf("Flagged") != -1 ? 1 : 0;
+                    let flag = attrs.flags.indexOf("Flagged") != -1 ? 1 : 0;
 
                     let mailImageDoc = {
                         website_id: ObjectId(website._id),
                         emailDomain: website.emailDomain,
                         unique_id: website.unique_id,
                         user_id: ObjectId(website.user_id),
-                        uid: mailObj.attrs.uid,
+                        uid: attrs.uid || null,
                         tags: website.tags,
-                        header: mailObj.header,
+                        header: mailObj.headers || null,
                         isRead: false,
                         flag: flag,
-                        cDate: new Date(mailObj.header.date),
-                        buffer: mailObj.buffer,
-                        parsedHtml: mailObj.parsed
+                        cDate: new Date(mailObj.date),
+                        buffer: mailObj || null,
+                        parsedHtml: mailObj.html
                     }
                     resolve({success: true, mailImageDoc: mailImageDoc, website: website})
                 }
