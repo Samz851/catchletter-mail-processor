@@ -265,7 +265,7 @@ class MailHandler {
                         flag: flag,
                         cDate: new Date(mailObj.date),
                         buffer: mailObj || null,
-                        parsedHtml: mailObj.html
+                        parsedHtml: mailObj.html || mailObj.text
                     }
                     resolve({success: true, mailImageDoc: mailImageDoc, website: website})
                 }
