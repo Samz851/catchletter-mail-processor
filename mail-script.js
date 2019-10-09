@@ -74,7 +74,7 @@ mailListener.on("mail", function(mail, seqno, attributes){
             //Now Save the MailImageDoc to DB
             if(thumbResult.success){
               handler.save_mailImage(mailObj, attributes).then(function(result){
-                // console.log(result);
+                console.log(result);
               }, function(err){
                 console.log(err);
               });
