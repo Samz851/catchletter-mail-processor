@@ -31,7 +31,7 @@ var options = {
   tls: true,// use secure connection
   tlsOptions: { rejectUnauthorized: false },
   fetchUnreadOnStart: true,
-  markSeen: false,
+  markSeen: true,
   mailbox: "INBOX", // mailbox to monitor
   searchFilter: ["UNSEEN",['SINCE', 'October 7, 2019']]
 }
