@@ -33,7 +33,7 @@ var options = {
   fetchUnreadOnStart: true,
   markSeen: false,
   mailbox: "INBOX", // mailbox to monitor
-  searchFilter: ["UNSEEN"]
+  searchFilter: ["UNSEEN",['SINCE', 'October 7, 2019']]
 }
 
 var mailListener = new MailListener(options);
