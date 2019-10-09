@@ -31,9 +31,9 @@ var options = {
   tls: true,// use secure connection
   tlsOptions: { rejectUnauthorized: false },
   fetchUnreadOnStart: true,
-  markSeen: false,
+  markSeen: true,
   mailbox: "INBOX", // mailbox to monitor
-  searchFilter: ["UNSEEN"]
+  searchFilter: ["UNSEEN",['SINCE', 'October 7, 2019']]
 }
 
 var mailListener = new MailListener(options);
