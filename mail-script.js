@@ -56,6 +56,9 @@ mailListener.on("error", function(err){
 });
  
 mailListener.on("mail", function(mail, seqno, attributes){
+  if(!attributes){
+    attributes = {flags: ""}
+  }
   // do something with mail object including attachments
   //SAM the mail obj is the parsed html
   // console.log("emailParsed: " + JSON.stringify(mail));
