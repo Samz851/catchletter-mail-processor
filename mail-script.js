@@ -52,7 +52,7 @@ mailListener.on("server:disconnected", function(){
 });
  
 mailListener.on("error", function(err){
-  // console.log(err);
+  mailListener.start();
 });
  
 mailListener.on("mail", function(mail, seqno, attributes){
@@ -82,6 +82,7 @@ mailListener.on("mail", function(mail, seqno, attributes){
                 console.log(result);
               }, function(err){
                 console.log(err);
+                mailListener.start();
               });
             }
           });
