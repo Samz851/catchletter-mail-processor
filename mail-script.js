@@ -1,6 +1,6 @@
 // const SimpleImap = require('./imap-listener');
 // var MailListener = require("mail-listener-fixed");
-var MailListener = require("mail-listener4");
+var MailListener = require("mail-listener2");
 var fs = require('fs');
 var util = require('util');
 var log_file = fs.createWriteStream(__dirname + '/email-handler.log', {flags : 'w'});
@@ -84,11 +84,11 @@ mailListener.on("mail", function(mail, seqno, attributes){
                 console.log(err);
                 mailListener.start();
               });
-            }
+            }else{ mailListener.start();}
           });
-        }
+        }else{ mailListener.start();}
       });
-    }
+    }else{ mailListener.start();}
 
   });
   // mail processing code goes here
