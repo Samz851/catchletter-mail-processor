@@ -81,10 +81,9 @@ mailListener.on("mail", function(mail, seqno, attributes){
               handler.save_mailImage(mailObj, attributes).then(function(result){
                 console.log(result);
               }, function(err){
-                console.log(err);
-                mailListener.start();
+
               });
-            }else{ mailListener.start();}
+            }
           });
         }else{ mailListener.start();}
       });
