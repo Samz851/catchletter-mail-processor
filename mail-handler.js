@@ -196,12 +196,12 @@ class MailHandler {
                         //     }
                         // });
                     } else {
-                        reject({success: false, message: "failed to process email images with no error"})
+                        reject({success: false, message: "failed to process email images with no error", error: err})
                     }
                 })
 
             } else {
-                reject({success: false, message: "failed to process email images because file exists", error: 'screenshot exists'})
+                resolve({success: false, message: "failed to process email images because file exists", error: 'screenshot exists'})
             }
         })
 
