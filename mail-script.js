@@ -49,6 +49,8 @@ mailListener.on("server:connected", function(){
  
 mailListener.on("server:disconnected", function(){
   console.log("imapDisconnected");
+  mailListener.start();
+
 });
  
 mailListener.on("error", function(err){
@@ -92,9 +94,7 @@ mailListener.on("mail", function(mail, seqno, attributes){
   });
   // mail processing code goes here
 });
-mailListener.on('server:disconnected', function(){
-  mailListener.start();
-})
+
 
 
 
