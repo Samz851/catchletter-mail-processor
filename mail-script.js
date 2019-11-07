@@ -49,7 +49,8 @@ mailListener.on("server:connected", function(){
  
 mailListener.on("server:disconnected", function(){
   console.log("imapDisconnected");
-  mailListener.start();
+  mailListener.stop();
+	setTimeout(()=>{ mailListener.start()},300);
 
 });
  
