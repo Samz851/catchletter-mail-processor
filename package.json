@@ -20,7 +20,7 @@
     "async": "^3.1.0",
     "compress-images": "^1.5.8",
     "cors": "^2.8.5",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "handlebars": "^4.3.1",
     "imap": "^0.8.19",
     "mail-listener-fixed": "^1.1.0",
